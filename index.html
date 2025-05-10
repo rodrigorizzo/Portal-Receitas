@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <section>
+        <h2>Adicionar nova receita</h2>
+        <label for="NRTitulo">Titulo</label><br>
+        <input type="text" name="NRTitulo" id="NRTitulo" placeholder=""> <br>
+        <label for="NRTempoPreparo">Tempo de Preparo</label><br>
+        <input type="number" name="NRTempoPreparo" id="NRTempoPreparo" placeholder="00"><br>
+        <label for="NRIngredientes">Ingredientes</label><br>
+        <input type="text" name="NRIngredientes" id="NRIngredientes" placeholder=""><button
+            id="adcIngrediente">+</button><br>
+        <label for="NRModoPreparo">Modo de preparo</label><br>
+        <input type="text" name="NRModoPreparo" id="NRModoPreparo" placeholder=""><br>
+        <label for="NRCategoria">Categoria</label>
+        <select id="NRCategoria">
+            <option value="0">Selecionar</option>
+            <option value="0">Selecionar</option>
+            <option value="0">Selecionar</option>
+            <option value="0">Selecionar</option>
+            <option value="0">Selecionar</option>
+        </select><br>
+        <button id="NRBotao">Enviar</button>
+        <button id="MostrarReceitas">Mostrar</button>
+    </section>
+
+    <section id="receitasSalvas">
+        <h2>Receitas Salvas</h2>
+
+    </section>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>
