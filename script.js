@@ -1,7 +1,6 @@
+/* __________________________ Variáveis __________________________ */
+
 /* DOM */
-
-/* Nova Receita = NR */
-
 const novaReceita = [
     document.querySelector("#NRTitulo"),
     document.querySelector("#NRTempoPreparo"),
@@ -9,26 +8,23 @@ const novaReceita = [
     document.querySelector("#NRModoPreparo"),
     document.querySelector("#NRCategoria")
 ]
-
 const NRBotao = document.querySelector("#NRBotao")
 const mostrarBotao = document.querySelector("#MostrarReceitas")
 
 /* Section onde posso inserir as receitas inseridas do usuário */
 const receitasSalvas = document.querySelector("#receitasSalvas")
 
-
-/* Outras variáveis */
 let numReceitas = 0
 
-/* localStorage.clear();
- */
+/* localStorage.clear(); */
 
-/* Eventos */
+/* __________________________ Eventos __________________________ */
+
 NRBotao.addEventListener("click", adicionarReceita)
 
 mostrarBotao.addEventListener("click", mostrarReceitas)
 
-/* Funções */
+/* __________________________ Funções __________________________ */
 
 function adicionarReceita() {
     let receita = [];
@@ -38,6 +34,7 @@ function adicionarReceita() {
     }
     )
     localStorage.setItem(`Receita ${numReceitas}`, receita)
+    console.log(typeof receita)
     numReceitas++
 }
 
@@ -57,3 +54,5 @@ function mostrarReceitas() {
         receitasSalvas.appendChild(lista)
     }
 }
+
+
