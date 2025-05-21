@@ -1,0 +1,15 @@
+/* TAGs */
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+input,
+textarea {
+    padding: 6px 12px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    border: 1px solid #bebebe;
+    border-radius: 5px;
+}
+
+/* BEM */

@@ -5,9 +5,15 @@ const novaReceita = [
     document.querySelector("#NRTitulo"),
     document.querySelector("#NRTempoPreparo"),
     document.querySelector("#NRIngredientes"),
-    document.querySelector("#NRModoPreparo"),
-    document.querySelector("#NRCategoria")
+    document.querySelector("#NRModoPreparo")
 ]
+
+for (let i = 1; i < 10; i++) {
+     novaReceita.push(document.querySelector(`#NRCat${i}`))
+}
+
+
+
 const NRBotao = document.querySelector("#NRBotao")
 const mostrarBotao = document.querySelector("#MostrarReceitas")
 
@@ -30,7 +36,9 @@ function adicionarReceita() {
     let receita = [];
 
     novaReceita.forEach((elemento) => {
-        receita.push(elemento.value)
+        let conteudo = elemento.checked || elemento.getAttribute("type") != "checkbox"? elemento.value : ""
+        receita.push(conteudo)
+        
     }
     )
     localStorage.setItem(`Receita ${numReceitas}`, receita)
@@ -40,18 +48,31 @@ function adicionarReceita() {
 
 function mostrarReceitas() {
     for (let i = 0; i < localStorage.length; i++) {
-        let lista = document.createElement("ul")
+        let container = document.createElement("article")
+
+        /* Tags para cada input: título, tempo de preparo, ingredientes, modo de preparo e categorias */
+        let elementosArray = ["h3", "p", "p", "p", "span"]
+        let classArray = []
+
         let receitaString = localStorage.getItem(localStorage.key(i))
         let receitaArray = receitaString.split(",")
 
-        for (let j = 0; j < receitaArray.length; j++ ) {
-            let item = document.createElement("li")
+        for (let j = 0; j < receitaArray.length; j++) {
+            let tagTipo
+            switch (j) {
+                case 0:
+                    tagTipo = "h3"
+                default:
+                    tagTipo = "p"
+            }
+            let item = document.createElement(tagTipo)
+
             let textoItem = `${receitaArray[j]}`
             item.append(textoItem)
-            lista.appendChild(item)
+            container.appendChild(item)
         }
 
-        receitasSalvas.appendChild(lista)
+        receitasSalvas.appendChild(container)
     }
 }
 
