@@ -1,79 +1,92 @@
-/* __________________________ Variáveis __________________________ */
 
-/* DOM */
-const novaReceita = [
-    document.querySelector("#NRTitulo"),
-    document.querySelector("#NRTempoPreparo"),
-    document.querySelector("#NRIngredientes"),
-    document.querySelector("#NRModoPreparo")
-]
-
-for (let i = 1; i < 10; i++) {
-     novaReceita.push(document.querySelector(`#NRCat${i}`))
-}
-
-
-
-const NRBotao = document.querySelector("#NRBotao")
-const mostrarBotao = document.querySelector("#MostrarReceitas")
-
-/* Section onde posso inserir as receitas inseridas do usuário */
-const receitasSalvas = document.querySelector("#receitasSalvas")
-
-let numReceitas = 0
-
-/* localStorage.clear(); */
+localStorage.clear();
 
 /* __________________________ Eventos __________________________ */
 
-NRBotao.addEventListener("click", adicionarReceita)
-
-mostrarBotao.addEventListener("click", mostrarReceitas)
+// Evento submit do formulário
+document.getElementById('formReceita').addEventListener('submit', function (e) {
+    e.preventDefault();
+    gerenciarForm();
+    this.reset();
+});
 
 /* __________________________ Funções __________________________ */
 
-function adicionarReceita() {
-    let receita = [];
 
-    novaReceita.forEach((elemento) => {
-        let conteudo = elemento.checked || elemento.getAttribute("type") != "checkbox"? elemento.value : ""
-        receita.push(conteudo)
-        
+//Gerenciar formulários
+function gerenciarForm() {
+    let categorias = [];
+
+    for (let i = 1; i <= 10; i++) {
+        const checkbox = document.querySelector(`#NRCat${i}`);
+
+        if (checkbox.checked) categorias.push(checkbox.value);
     }
-    )
-    localStorage.setItem(`Receita ${numReceitas}`, receita)
-    console.log(typeof receita)
-    numReceitas++
+
+    const novaReceita = {
+        id: Date.now(),
+        titulo: document.querySelector("#NRTitulo").value,
+        tempo: document.querySelector("#NRTempoPreparo").value,
+        ingredientes: document.querySelector("#NRIngredientes").value
+                            .split(',')
+                            .map(i => i.trim())
+                            .filter(i => i.lenght > 0),
+        preparo: document.querySelector("#NRModoPreparo").value,
+        catergorias: categorias
+    };
+
+    salvarReceita(novaReceita);
+    mostrarReceitas(novaReceita);
 }
 
-function mostrarReceitas() {
-    for (let i = 0; i < localStorage.length; i++) {
-        let container = document.createElement("article")
+function salvarReceita(receita) {
+    const receitadasGravadas = obterReceitas();
+    receitadasGravadas.push(receita);
+    localStorage.setItem('receitas', JSON.stringify(receitadasGravadas));
 
-        /* Tags para cada input: título, tempo de preparo, ingredientes, modo de preparo e categorias */
-        let elementosArray = ["h3", "p", "p", "p", "span"]
-        let classArray = []
+}
 
-        let receitaString = localStorage.getItem(localStorage.key(i))
-        let receitaArray = receitaString.split(",")
+function obterReceitas() {
+    return JSON.parse(localStorage.getItem('receitas') || '[]');
+}
 
-        for (let j = 0; j < receitaArray.length; j++) {
-            let tagTipo
-            switch (j) {
-                case 0:
-                    tagTipo = "h3"
-                default:
-                    tagTipo = "p"
-            }
-            let item = document.createElement(tagTipo)
+function carregarReceitas() {
+    const receitadasGravadas = obterReceitas();
+    receitadasGravadas.forEach(i => { mostrarReceitas(i) });
+}
 
-            let textoItem = `${receitaArray[j]}`
-            item.append(textoItem)
-            container.appendChild(item)
-        }
+function mostrarReceitas(receita) {
+    console.log(receita)
+    const container = document.querySelector("#receitasSection");
+    const template = document.querySelector("#receitaModelo");
+    const clone = document.importNode(template.content, true);
 
-        receitasSalvas.appendChild(container)
-    }
+    const titulo = clone.querySelector(".receita__h3");
+    const ingredientes = clone.querySelector(".receita__ingredientes");
+    const preparo = clone.querySelector(".receita__preparo");
+    const categorias = clone.querySelector(".receita__categoria");
+    const destaque = clone.querySelector(".receita__destaques")
+    const excluirBtn = clone.querySelector(".button")
+
+    titulo.textContent = receita.titulo;
+
+    preparo.textContent = receita.preparo;
+
+    receita.ingredientes.forEach(ingrediente => {
+        const li = document.createElement('li');
+        li.textContent = ingrediente;
+        ingredientes.appendChild(li)
+    })
+
+    categorias.textContent = receita.categorias;
+
+    excluirBtn.addEventListener('click', () => console.log("deletarReceita(receita.id)"));
+
+    container.appendChild(clone);
+}
+
+function deletarReceitas(id) {
+
 }
 
 

@@ -1,15 +1,82 @@
 /* TAGs */
+:root {
+    --font-family: 'Segoe UI', Arial, sans-serif;
 
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: var(--font-family);
 }
 
-input,
-textarea {
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__item {
+    display: inline;
+    margin: 0;
+}
+
+.header__ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+.header__li {
+    display: inline;
+}
+
+.header__link {
+    text-decoration: none;
+    color: #000;
+    padding: 4px 8px;
+
+    &:hover {
+        background-color: #ddd;
+    }
+}
+
+.NR {
+    background-color: bisque;
+    padding: 12px;
+    width: 400px;
+}
+
+.NR__H2 {
+    margin: 0;
+}
+
+.btn {
+    font-family: var(--font-family);
+    font-size: 1rem;
     padding: 6px 12px;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 6px;
+}
+
+.input {
+    padding: 12px 12px;
+    font-family: var(--font-family);
     border: 1px solid #bebebe;
     border-radius: 5px;
 }
 
-/* BEM */
+.checkbox-container {
+    /* Para impedir que a checkbox fique distante da label */
+    white-space: nowrap;
+}
+
+
+.receita {
+/*     width: 33%;
+ */}
+
+.receita__destaques {
+    list-style-type: none;
+    padding: 0;
+}
+
+.receita__item {
+    display: inline;
+}
