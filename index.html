@@ -9,117 +9,144 @@
 </head>
 
 <body>
-    <header class="header">
-        <h1 class="header__item">Meu Caderno de Receitas</h1>
-        <nav class="header__item">
-            <ul class="header__ul">
-                <li class="header__li"> <a class="header__link" href="">Nova Receita</a></li>
-                <li class="header__li"><a class="header__link" href="">Exportar</a></li>
-                <li class="header__li"><a class="header__link" href="">Categorias</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
+    <div class="app">
 
-        <section id="NR" class="NR">
-            <h2 class="NR__H2">Adicionar nova receita</h2>
-            <form id="formReceita">
-                <p>
-                    <label for="NRTitulo">Nome da Receita</label><br>
-                    <input class="input" type="text" name="NRTitulo" id="NRTitulo" placeholder="" required>
-                </p>
-                <p>
-                    <label for="NRTempoPreparo">Tempo de Preparo</label><br>
-                    <input class="input" type="number" name="NRTempoPreparo" id="NRTempoPreparo" placeholder="">
-                </p>
+        <header class="header">
+            <h1 class="header__item header__titulo">Meu Caderno de Receitas</h1>
+            <nav class="header__item">
+                <ul class="header__ul">
+                    <li class="header__li"> <a class="header__link" href="#NR">Adicionar</a></li>
+                    <li class="header__li"><a class="header__link" href="">Exportar</a></li>
+                    <li class="header__li"><a class="header__link" href="">Filtrar</a></li>
+                </ul>
+            </nav>
+        </header>
 
-                <p>
-                    <label for="NRIngredientes">Ingredientes</label><br>
-                    <input class="input" type="text" name="NRIngredientes" id="NRIngredientes" placeholder="" required>
-                </p>
-                <p>
-                    <label for="NRModoPreparo">Modo de preparo</label><br>
-                    <textarea class="input" name="NRModoPreparo" id="NRModoPreparo" required></textarea>
-                </p>
-                <fieldset>
-                    <legend>Categorias</legend>
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Bolos e Tortas" value="Bolos e Tortas" id="NRCat1">
-                        <label for="Bolos e Tortas">Bolos e Tortas</label>
-                    </span>
+        <main>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Carnes" value="Carnes" id="NRCat2">
-                        <label for="Carnes">Carnes</label>
-                    </span>
+            <section>
+                <h2>Minhas Receitas</h2>
+                <div id="receitasSection" class="receitas-section">
+                    <template id="receitaModelo">
+                        <article class="receita__container">
+                            <ul class="receita__lista-categorias"></ul>
+                            <h3 class="receita__titulo"></h3>
+                            <ul class="receita__destaques"></ul>
+                            <h4 class="receita__h4">Ingredientes</h4>
+                            <ul class="receita__lista-ingredientes"></ul>
+                            <h4 class="receita__h4">Modo de Preparo</h4>
+                            <div class="receita__preparo"></div>
+                            <button type="button" class="button">Excluir</button>
+                        </article>
+                    </template>
+                </div>
+            </section>
+        </main>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Aves" value="Aves" id="NRCat3">
-                        <label for="Aves">Aves</label>
-                    </span>
+            <section id="NR" class="receita-form__section">
+                <h2 class="receita-form__titulo-section">Adicionar nova receita</h2>
+                <form id="formReceita" class="receita-form__form">
+                    <div class="receita-form__coluna">
+                        <p>
+                            <label class="receita-form__label" for="NRTitulo">Nome da Receita</label><br>
+                            <input class="receita-form__input" type="text" name="NRTitulo" id="NRTitulo" placeholder=""
+                                required>
+                            <span class="receita-form__descritivo"></span>
+                        </p>
+                        <p>
+                            <label class="receita-form__label" for="NRIngredientes">Ingredientes</label><br>
+                            <input class="receita-form__input" type="text" name="NRIngredientes" id="NRIngredientes"
+                                placeholder="Ingrediente 1, Ingrediente 2, Ingrediente 3" required>
+                            <span class="receita-form__descritivo">Separe os ingredientes por vírgula.</span>
+                        </p>
+                        <p>
+                            <label class="receita-form__label" for="NRModoPreparo">Modo de preparo</label><br>
+                            <textarea class="receita-form__textarea" name="NRModoPreparo" id="NRModoPreparo"
+                                required></textarea>
+                            <span class="receita-form__descritivo"></span>
+                        </p>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Peixes e Frutos do Mar" value="Peixes e Frutos do Mar" id="NRCat4">
-                        <label for="Peixes e Frutos do Mar">Peixes e Frutos do Mar</label>
-                    </span>
+                    </div>
+                    <div class="receita-form__coluna">
+                        <p>
+                            <label class="receita-form__label" for="NRTempoPreparo">Tempo de Preparo</label><br>
+                            <input class="receita-form__input--inline" type="time" name="NRTempoPreparo" id="NRTempoPreparo">
+                        </p>
+                        <fieldset class="receita-form__fieldset">
+                            <legend>Categorias</legend>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Bolos e Tortas"
+                                    value="Bolos e Tortas" id="NRCat1">
+                                <label class="receita-form__cb-label" for="Bolos e Tortas">Bolos e Tortas</label>
+                            </span>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Saladas e Molhos" value="Saladas e Molhos" id="NRCat5">
-                        <label for="Saladas e Molhos">Saladas e Molhos</label>
-                    </span>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Carnes" value="Carnes"
+                                    id="NRCat2">
+                                <label class="receita-form__cb-label" for="Carnes">Carnes</label>
+                            </span>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Massas" value="Massas" id="NRCat6">
-                        <label for="Massas">Massas</label>
-                    </span>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Aves" value="Aves" id="NRCat3">
+                                <label class="receita-form__cb-label" for="Aves">Aves</label>
+                            </span>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Bebidas" value="Bebidas" id="NRCat7">
-                        <label for="Bebidas">Bebidas</label>
-                    </span>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Peixes e Frutos do Mar"
+                                    value="Peixes e Frutos do Mar" id="NRCat4">
+                                <label class="receita-form__cb-label" for="Peixes e Frutos do Mar">Peixes e Frutos do
+                                    Mar</label>
+                            </span>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Doces e Sobremesas" value="Doces e Sobremesas" id="NRCat8">
-                        <label for="Doces e Sobremesas">Doces e Sobremesas</label>
-                    </span>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Saladas e Molhos"
+                                    value="Saladas e Molhos" id="NRCat5">
+                                <label class="receita-form__cb-label" for="Saladas e Molhos">Saladas e Molhos</label>
+                            </span>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Lanches" value="Lanches" id="NRCat9">
-                        <label for="Lanches">Lanches</label>
-                    </span>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Massas" value="Massas"
+                                    id="NRCat6">
+                                <label class="receita-form__cb-label" for="Massas">Massas</label>
+                            </span>
 
-                    <span class="checkbox-container">
-                        <input type="checkbox" name="Alimentação Saudável" value="Alimentação Saudável" id="NRCat10">
-                        <label for="Alimentação Saudável">Alimentação Saudável</label>
-                    </span>
-                </fieldset>
-                <button class="btn" id="NRBotao">Enviar</button>
-            </form>
-        </section>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Bebidas" value="Bebidas"
+                                    id="NRCat7">
+                                <label class="receita-form__cb-label" for="Bebidas">Bebidas</label>
+                            </span>
 
-        <section id="receitasSection">
-            <h2>Minhas Receitas</h2>
-            <template id="receitaModelo">
-                <article class="receita">
-                    <span class="receita__categoria"></span>
-                    <h3 class="receita__h3"></h3>
-                    <ul class="receita__destaques"></ul>
-                    <h4 class="receita__h4">Ingredientes</h4>
-                    <ul class="receita__ingredientes"></ul>
-                    <h4 class="receita__h4">Modo de Preparo</h4>
-                    <div class="receita__preparo"></div>
-                    <button type="button" class="button">Excluir</button>
-                </article>
-            </template>
-        </section>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Doces e Sobremesas"
+                                    value="Doces e Sobremesas" id="NRCat8">
+                                <label class="receita-form__cb-label" for="Doces e Sobremesas">Doces e
+                                    Sobremesas</label>
+                            </span>
 
-    </main>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Lanches" value="Lanches"
+                                    id="NRCat9">
+                                <label class="receita-form__cb-label" for="Lanches">Lanches</label>
+                            </span>
 
-    <footer>
+                            <span class="receita-form__cb-container">
+                                <input class="receita-form__cb" type="checkbox" name="Alimentação Saudável"
+                                    value="Alimentação Saudável" id="NRCat10">
+                                <label class="receita-form__cb-label" for="Alimentação Saudável">Alimentação
+                                    Saudável</label>
+                            </span>
+                        </fieldset>
+                        <button class="btn" id="NRBotao">Enviar</button>
+                        <button type="button" onclick="carregarReceitas()"> Mostrar</button>
+                    </div>
+                </form>
+            </section>
 
-    </footer>
-
+        <footer>
+            <p>Desenvolvido por Rodrigo Rizzo Simões 2025</p>
+        </footer>
+    </div>
     <script src="/script.js"></script>
 </body>
 
