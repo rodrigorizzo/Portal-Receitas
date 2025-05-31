@@ -3,18 +3,16 @@
 :root {
     --font-family: 'Sour Gummy', Arial, sans-serif;
     font-family: var(--font-family);
-
+    font-weight: 300;
 
 
 }
 
 body {
-    background-image: linear-gradient(rgb(253, 126, 104), rgb(252, 167, 87));
     margin: 0;
 }
 
 .app {
-    max-width: 800px;
     margin: 0 auto;
     padding: 16px;
     background-color: #fff;
@@ -72,6 +70,7 @@ body {
 
 .receita-form__coluna {
     width: 100%;
+    min-width: 50%;
 }
 
 .receita-form__input,
@@ -88,6 +87,11 @@ body {
     background-color: transparent;
     border: 1px solid #bebebe;
     border-radius: 5px;
+
+
+    &:user-invalid {
+        border: #f00 solid 1px;
+    }
 }
 
 .receita-form__textarea {
@@ -96,7 +100,8 @@ body {
 }
 
 .receita-form__input--inline {
-    display: inline-block;
+    max-width: 100%;
+
 }
 
 .receita-form__label {
@@ -108,6 +113,39 @@ body {
 .receita-form__descritivo {
     font-size: 0.8rem;
     font-weight: 200;
+}
+
+.receita-form__selecao {
+    padding: 12px 14px 8px 14px;
+
+    box-sizing: border-box;
+
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 300;
+
+    background-color: transparent;
+    border: 1px solid #bebebe;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
+
+.receita-form__option {
+    background-color: #fff;
+}
+
+.receita-form__btn {
+    display: inline-block;
+    background-color: #bebebe;
+    padding: 12px 14px 8px 14px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #4b4b4b;
+    }
 }
 
 
@@ -123,7 +161,7 @@ body {
 
 /* cb = checkbox */
 .receita-form__cb {
-    margin: 0;
+    margin: 0 2px 0 0;
 
     &:checked {
         accent-color: #000;
@@ -132,14 +170,12 @@ body {
 
 .receita-form__cb-label {
     font-weight: 200;
-}
+    cursor: pointer;
 
-.receita-form__cb-container {
     /* Para impedir que a checkbox fique distante da label */
     white-space: nowrap;
     margin: 0;
 }
-
 
 
 .btn {
@@ -162,7 +198,7 @@ body {
 
 .receita__container {
     background-color: #bebebe;
-    padding: 8px;
+    padding: 12px 8px 8px 8px;
 }
 
 .receita__lista-categorias {
@@ -190,8 +226,17 @@ body {
     margin: 0;
 }
 
-.receita__h4 {
+.receita__lista-ingredientes {
+    padding-left: 14px;
     margin: 0;
+}
+
+.receita__destaques {
+    margin: 0;
+}
+
+.receita__h4 {
+    margin: 12px 0 4px 0;
 }
 
 .receita__destaques {
@@ -201,4 +246,15 @@ body {
 
 .receita__item {
     display: inline;
+}
+
+
+.u--esconder {
+    visibility: hidden;
+    display: none;
+}
+
+.u__rows {
+    display: flex;
+    gap: 12px;
 }

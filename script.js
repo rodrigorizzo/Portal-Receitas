@@ -27,9 +27,13 @@ function gerenciarForm() {
     const novaReceita = {
         id: Date.now(),
         titulo: document.querySelector("#NRTitulo").value,
-        tempo: document.querySelector("#NRTempoPreparo").value,
+        
+        
         ingredientes: document.querySelector("#NRIngredientes").value.split(',').map(i => i.trim()),
         preparo: document.querySelector("#NRModoPreparo").value,
+        tempo: document.querySelector("#NRTempoPreparo").value,
+        classificacao: document.querySelector("#NRClassificacao")
+        dificuldade: document.querySelector("#NRDificuldade")
         categorias: categorias
     };
 
@@ -65,6 +69,8 @@ function mostrarReceitas(receita) {
     const categorias = clone.querySelector(".receita__lista-categorias");
     const destaque = clone.querySelector(".receita__destaques")
     const excluirBtn = clone.querySelector(".button")
+    const mostrarBtn = clone.querySelector(".receita__mostrarBtn")
+    const infoEscondida = clone.querySelector(".receita__principal")
 
     titulo.textContent = receita.titulo;
 
@@ -87,8 +93,14 @@ function mostrarReceitas(receita) {
         })
     }
 
+    const li = document.createElement('li');
+    li.textContent = receita.tempo;
+    destaque.appendChild(li)
 
+    mostrarBtn.addEventListener('click', () => {
+        infoEscondida.className = infoEscondida.className.includes("u--esconder") ? "receita__principal" : "receita__principal u--esconder"})
     excluirBtn.addEventListener('click', () => deletarReceita(receita.id));
+
 
     container.appendChild(clone);
 }
@@ -98,7 +110,7 @@ function deletarReceita(id) {
     let receitasGravadas = obterReceitas();
     receitasGravadas = receitasGravadas.filter(receita => receita.id != id);
     localStorage.setItem('receitas', JSON.stringify(receitasGravadas));
-    document.querySelector('#receitasSection').innerHTML = '';
+    document.querySelector('#receitasSection').replaceChildren();
     carregarReceitas();
 }
 
