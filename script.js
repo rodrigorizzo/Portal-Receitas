@@ -27,18 +27,21 @@ function gerenciarForm() {
     const novaReceita = {
         id: Date.now(),
         titulo: document.querySelector("#NRTitulo").value,
-        
-        
         ingredientes: document.querySelector("#NRIngredientes").value.split(',').map(i => i.trim()),
         preparo: document.querySelector("#NRModoPreparo").value,
         tempo: document.querySelector("#NRTempoPreparo").value,
-        classificacao: document.querySelector("#NRClassificacao")
-        dificuldade: document.querySelector("#NRDificuldade")
+        classificacao: document.querySelector("#NRClassificacao").value,
+        dificuldade: document.querySelector("#NRDificuldade").value,
         categorias: categorias
     };
 
-    salvarReceita(novaReceita);
+/*     validarReceita(novaReceita);
+ */    salvarReceita(novaReceita);
     mostrarReceitas(novaReceita);
+}
+
+function validarReceita(receita) {
+
 }
 
 function salvarReceita(receita) {
@@ -63,13 +66,14 @@ function mostrarReceitas(receita) {
     const template = document.querySelector("#receitaModelo");
     const clone = document.importNode(template.content, true);
 
+    const receitaCaixa = clone.querySelector(".receita__container");
     const titulo = clone.querySelector(".receita__titulo");
     const ingredientes = clone.querySelector(".receita__lista-ingredientes");
     const preparo = clone.querySelector(".receita__preparo");
     const categorias = clone.querySelector(".receita__lista-categorias");
     const destaque = clone.querySelector(".receita__destaques")
     const excluirBtn = clone.querySelector(".button")
-    const mostrarBtn = clone.querySelector(".receita__mostrarBtn")
+    const mostrarBtn = clone.querySelector(".receita__mostrar-btn")
     const infoEscondida = clone.querySelector(".receita__principal")
 
     titulo.textContent = receita.titulo;
@@ -77,32 +81,47 @@ function mostrarReceitas(receita) {
     preparo.textContent = receita.preparo;
 
     receita.ingredientes.forEach(ingrediente => {
-        const li = document.createElement('li');
-        li.textContent = ingrediente;
-        ingredientes.appendChild(li)
+        criarItemLista(ingrediente, ingredientes, "receita__ingrediente-item")
     })
 
 
     //Como o usuário não é obrigado a inserir categorias é preciso checar se não é null
     if (receita.categorias != null) {
         receita.categorias.forEach(categoria => {
-            const li = document.createElement('li');
-            li.textContent = categoria;
-            li.className = "receita__categoria";
-            categorias.appendChild(li)
+            criarItemLista(categoria, categorias, "receita__categoria")
         })
     }
 
-    const li = document.createElement('li');
-    li.textContent = receita.tempo;
-    destaque.appendChild(li)
+    criarItemLista(receita.tempo, destaque, "receita__item receita__tempo")
+    criarItemLista(receita.dificuldade, destaque, "receita__item receita__dificuldade")
+
+
+    let estrela = "⭐"
+    criarItemLista(estrela.repeat(receita.classificacao), destaque, "receita__item receita__classificacao")
+
+    let leaveFuncao = () => {
+        setTimeout(teste, "500");
+        clone.removeEventListener('mouseleave', leaveFuncao);
+    };
+
+    let teste = () => {infoEscondida.className = "receita__principal u--esconder"}
 
     mostrarBtn.addEventListener('click', () => {
-        infoEscondida.className = infoEscondida.className.includes("u--esconder") ? "receita__principal" : "receita__principal u--esconder"})
+        infoEscondida.className = infoEscondida.className.includes("u--esconder") ? "receita__principal" : "receita__principal u--esconder";
+        receitaCaixa.addEventListener('mouseleave', leaveFuncao);
+    })
+
     excluirBtn.addEventListener('click', () => deletarReceita(receita.id));
 
 
     container.appendChild(clone);
+}
+
+function criarItemLista(conteudo, parente, classe) {
+    const li = document.createElement('li');
+    li.textContent = conteudo;
+    li.className = classe;
+    parente.appendChild(li)
 }
 
 function deletarReceita(id) {
