@@ -1,4 +1,8 @@
 /* localStorage.clear();  */
+
+
+
+
 /* __________________________ Eventos __________________________ */
 
 // Carregar receitas ao iniciar
@@ -10,6 +14,21 @@ document.getElementById('formReceita').addEventListener('submit', function (e) {
     gerenciarForm();
     this.reset();
 });
+
+// Formulário de tempo
+
+document.getElementById('NRTempoPreparo').addEventListener('input', function () {
+    let value = this.value.replace(/\D/g, '');
+  
+    if(value.length > 2){
+    value = value.substring(0, 2) + ':' + value.substring(2, 4);
+    }
+
+
+    this.value = value.substring(0, 5);
+
+})
+
 
 /* __________________________ Funções __________________________ */
 
@@ -104,7 +123,7 @@ function mostrarReceitas(receita) {
         clone.removeEventListener('mouseleave', leaveFuncao);
     };
 
-    let teste = () => {infoEscondida.className = "receita__principal u--esconder"}
+    let teste = () => { infoEscondida.className = "receita__principal u--esconder" }
 
     mostrarBtn.addEventListener('click', () => {
         infoEscondida.className = infoEscondida.className.includes("u--esconder") ? "receita__principal" : "receita__principal u--esconder";

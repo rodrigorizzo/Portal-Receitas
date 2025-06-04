@@ -1,9 +1,8 @@
-
 :root {
     --font-family: 'Quicksand', times, Arial, sans-serif;
     --font-thin: 400;
     --font-regular: 500;
-    --font-bold:700;
+    --font-bold: 700;
 
 
 
@@ -75,14 +74,23 @@ body {
     margin: 0;
 }
 
-.receita-form__form {
+.receita-form__container {
     display: flex;
     gap: 12px;
 }
 
+.receita-form__grupoBtn {
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+}
+
 .receita-form__coluna {
     width: 100%;
-    min-width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .receita-form__input,
@@ -104,27 +112,34 @@ body {
     &:user-invalid {
         border: #f00 solid 1px;
     }
+
+
 }
 
 .receita-form__textarea {
     resize: vertical;
     min-height: 100px;
+    margin: 0;
 }
 
-.receita-form__input--inline {
-    max-width: 100%;
-
-}
-
+/* .receita-form__input--inline {}
+ */
 .receita-form__label {
+    display: inline-block;
+
     font-size: 0.9rem;
     font-weight: var(--font-regular);
     color: #4b4b4b;
+
 }
 
 .receita-form__descritivo {
     font-size: 0.8rem;
     font-weight: var(--font-thin);
+}
+
+.receita-form__descritivo--erro {
+    color: #f00;
 }
 
 .receita-form__selecao {
@@ -143,23 +158,35 @@ body {
     cursor: pointer;
 }
 
-
-
 .receita-form__option {
     background-color: #fff;
 }
 
 .receita-form__btn {
     display: inline-block;
-    background-color: #bebebe;
+    background-color: #36d0ff;
+    font-family: var(--font-family);
+    font-weight: var(--font-bold);
+    font-size: 1rem;
+
+    border: 0;
+    border-radius: 5px;
+    box-shadow: ;
+
     padding: 12px 14px 8px 14px;
     cursor: pointer;
 
     &:hover {
-        background-color: #4b4b4b;
+        background-color: #b1b1b1;
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
     }
 }
 
+.receita-form__btn--enviar {
+    background-color: #b2ff36;
+    padding: 12px 36px 8px 36px;
+}
 
 .receita-form__fieldset {
     display: flex;
@@ -218,8 +245,9 @@ body {
     border: #bebebe solid 1px;
     border-radius: 5px;
 
-    &:hover{
+    &:hover {
         box-shadow: 2px 2px 5px #dfdfdf;
+        transition: all 0.3s ease;
     }
 }
 
@@ -271,9 +299,6 @@ body {
 
 .receita__item {
     display: inline;
-    /*     padding: 4px 12px;
- */
-
 }
 
 .receita__tempo::before {
@@ -290,11 +315,11 @@ body {
     border: 0;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
         background-color: #eeeeee;
     }
 
-    &:active{
+    &:active {
         background-color: #ddd;
     }
 
