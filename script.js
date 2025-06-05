@@ -19,13 +19,28 @@ document.getElementById('formReceita').addEventListener('submit', function (e) {
 
 document.getElementById('NRTempoPreparo').addEventListener('input', function () {
     let value = this.value.replace(/\D/g, '');
-  
-    if(value.length > 2){
-    value = value.substring(0, 2) + ':' + value.substring(2, 4);
+
+    if (value.length > 2) {
+        value = value.substring(0, 2) + ':' + value.substring(2, 4);
     }
 
 
     this.value = value.substring(0, 5);
+
+})
+
+document.getElementById("NRLimparBtn").addEventListener("click", function () {
+    document.querySelector("#NRTitulo").value = "";
+    document.querySelector("#NRIngredientes").value = "";
+    document.querySelector("#NRModoPreparo").value = "";
+    document.querySelector("#NRTempoPreparo").value = "";
+    document.querySelector("#NRClassificacao").value = "";
+    document.querySelector("#NRDificuldade").value = "";
+
+    for (let i = 1; i <= 10; i++) {
+        let checkbox = `#NRCat${i}`;
+        document.querySelector(checkbox).checked = false;
+    }
 
 })
 
@@ -47,7 +62,7 @@ function gerenciarForm() {
         id: Date.now(),
         titulo: document.querySelector("#NRTitulo").value,
         ingredientes: document.querySelector("#NRIngredientes").value.split(',').map(i => i.trim()),
-        preparo: document.querySelector("#NRModoPreparo").value,
+        preparo: document.querySelector("#NRModoPreparo").value.split('\n').map(i => i.trim()),
         tempo: document.querySelector("#NRTempoPreparo").value,
         classificacao: document.querySelector("#NRClassificacao").value,
         dificuldade: document.querySelector("#NRDificuldade").value,
@@ -97,26 +112,36 @@ function mostrarReceitas(receita) {
 
     titulo.textContent = receita.titulo;
 
-    preparo.textContent = receita.preparo;
+
+
+
+    receita.preparo.forEach(paragrafo => {
+        criarItemLista(paragrafo, preparo, "receita_paragrafo", "p")
+    })
+
+
+
+
 
     receita.ingredientes.forEach(ingrediente => {
-        criarItemLista(ingrediente, ingredientes, "receita__ingrediente-item")
+        criarItemLista(ingrediente, ingredientes, "receita__ingrediente-item", "li")
     })
+
 
 
     //Como o usuário não é obrigado a inserir categorias é preciso checar se não é null
     if (receita.categorias != null) {
         receita.categorias.forEach(categoria => {
-            criarItemLista(categoria, categorias, "receita__categoria")
+            criarItemLista(categoria, categorias, "receita__categoria", "li")
         })
     }
 
-    criarItemLista(receita.tempo, destaque, "receita__item receita__tempo")
-    criarItemLista(receita.dificuldade, destaque, "receita__item receita__dificuldade")
+    criarItemLista(receita.tempo, destaque, "receita__item receita__tempo", "li")
+    criarItemLista(receita.dificuldade, destaque, "receita__item receita__dificuldade", "li")
 
 
     let estrela = "⭐"
-    criarItemLista(estrela.repeat(receita.classificacao), destaque, "receita__item receita__classificacao")
+    criarItemLista(estrela.repeat(receita.classificacao), destaque, "receita__item receita__classificacao", "li")
 
     let leaveFuncao = () => {
         setTimeout(teste, "500");
@@ -136,11 +161,11 @@ function mostrarReceitas(receita) {
     container.appendChild(clone);
 }
 
-function criarItemLista(conteudo, parente, classe) {
-    const li = document.createElement('li');
-    li.textContent = conteudo;
-    li.className = classe;
-    parente.appendChild(li)
+function criarItemLista(conteudo, parente, classe, tag) {
+    const item = document.createElement(tag);
+    item.textContent = conteudo;
+    item.className = classe;
+    parente.appendChild(item)
 }
 
 function deletarReceita(id) {

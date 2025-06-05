@@ -171,7 +171,7 @@ body {
 
     border: 0;
     border-radius: 5px;
-    box-shadow: ;
+
 
     padding: 12px 14px 8px 14px;
     cursor: pointer;
@@ -231,7 +231,7 @@ body {
 
 .receitas-section {
     display: grid;
-    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, minmax(400px, 1fr));
     gap: 16px;
 }
 
@@ -333,4 +333,33 @@ body {
 .u__rows {
     display: flex;
     gap: 12px;
+}
+
+
+@media screen and (max-width: 1260px) {
+    .receitas-section {
+        grid-template-columns: repeat(2, minmax(400px, 560px));
+        gap: 16px;
+
+        width: fit-content;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 860px) {
+    .receitas-section {
+        grid-template-columns: 100%;
+        gap: 16px;
+
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .receita-form__container {
+        flex-direction: column;
+    }
+
+    .u__rows {
+        flex-direction: column;
+    }
 }
