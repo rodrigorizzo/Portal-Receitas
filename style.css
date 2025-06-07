@@ -4,13 +4,17 @@
     --font-regular: 500;
     --font-bold: 700;
 
-
+    --cor-primaria: #000000;
+    --cor-cinza-claro: #ddd;
+    --cor-cinza-medio: #bebebe;
+    --cor-cinza-escuro: #555555;
 
     font-family: var(--font-family);
     font-weight: 400;
 
 
 }
+
 
 body {
     margin: 0;
@@ -112,8 +116,6 @@ body {
     &:user-invalid {
         border: #f00 solid 1px;
     }
-
-
 }
 
 .receita-form__textarea {
@@ -242,8 +244,8 @@ body {
     gap: 8px;
 
     padding: 24px 16px 16px 16px;
-    border: #bebebe solid 1px;
-    border-radius: 5px;
+
+    border: #ddd solid 1px;
 
     &:hover {
         box-shadow: 2px 2px 5px #dfdfdf;
@@ -298,15 +300,24 @@ body {
 }
 
 .receita__item {
-    display: inline;
+    display: block;
+    margin: auto 0;
 }
 
 .receita__tempo::before {
-    content: "⏳";
+    content: url(imagens/icone-tempo.svg);
+    display: inline-block;
+    margin-right: 2px;
+
+    width: 20px;
 }
 
 .receita__dificuldade::before {
-    content: "👩‍🍳";
+    content: url(imagens/icone-chef.svg);
+    display: inline-block;
+    margin-right: 2px;
+
+    width: 20px;
 }
 
 .receita__mostrar-btn {
@@ -335,6 +346,15 @@ body {
     gap: 12px;
 }
 
+.u__resetBtn {
+    border: 0;
+    background-color: transparent;
+}
+
+.u__icone {
+    width: 20px;
+}
+
 
 @media screen and (max-width: 1260px) {
     .receitas-section {
@@ -355,11 +375,27 @@ body {
         margin: 0 auto;
     }
 
+    .receita__container {
+        width: 500px;
+    }
+
     .receita-form__container {
         flex-direction: column;
     }
 
     .u__rows {
         flex-direction: column;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .receitas-section {
+        width: 100%;
+        margin: 0;
+    }
+
+    .receita__container {
+        width: calc(100% - 34px);
     }
 }

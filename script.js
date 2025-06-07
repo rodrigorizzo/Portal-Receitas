@@ -29,6 +29,15 @@ document.getElementById('NRTempoPreparo').addEventListener('input', function () 
 
 })
 
+//Botão de recarregar
+document.getElementById("recarregarBtn").addEventListener("click", () => {
+    console.log("Recarregar funcionou")
+    document.getElementById("receitasSection").replaceChildren();
+    carregarReceitas();
+})
+
+//Botão Limpar
+
 document.getElementById("NRLimparBtn").addEventListener("click", function () {
     document.querySelector("#NRTitulo").value = "";
     document.querySelector("#NRIngredientes").value = "";
@@ -43,6 +52,8 @@ document.getElementById("NRLimparBtn").addEventListener("click", function () {
     }
 
 })
+
+
 
 
 /* __________________________ Funções __________________________ */
@@ -69,8 +80,7 @@ function gerenciarForm() {
         categorias: categorias
     };
 
-/*     validarReceita(novaReceita);
- */    salvarReceita(novaReceita);
+    salvarReceita(novaReceita);
     mostrarReceitas(novaReceita);
 }
 
@@ -136,23 +146,40 @@ function mostrarReceitas(receita) {
         })
     }
 
-    criarItemLista(receita.tempo, destaque, "receita__item receita__tempo", "li")
+    let tempoString = receita.tempo.startsWith("00:") ? receita.tempo.substring(3, 5) + " min." : receita.tempo;
+    criarItemLista(tempoString, destaque, "receita__item receita__tempo", "li")
+
+
     criarItemLista(receita.dificuldade, destaque, "receita__item receita__dificuldade", "li")
 
+    let estrelas = document.createElement("li")
 
-    let estrela = "⭐"
-    criarItemLista(estrela.repeat(receita.classificacao), destaque, "receita__item receita__classificacao", "li")
+
+    for (let i = Number(receita.classificacao); i > 0; i--) {
+        let estrela = document.createElement("img");
+        estrela.setAttribute("src", "imagens/icone-estrela.svg");
+        estrela.className = "u__icone";
+        estrelas.appendChild(estrela);
+    }
+    estrelas.className = "receita__item";
+    destaque.appendChild(estrelas);
+
+    /*     criarItemLista(estrela.repeat(receita.classificacao), destaque, "receita__item receita__classificacao", "li")
+     */
+
 
     let leaveFuncao = () => {
-        setTimeout(teste, "500");
+        setTimeout(classEsconder, "500");
+        mostrarBtn.querySelector("#iconeMostrarBtn").setAttribute("src", "imagens/icone-mostrar.svg")
         clone.removeEventListener('mouseleave', leaveFuncao);
     };
 
-    let teste = () => { infoEscondida.className = "receita__principal u--esconder" }
+    let classEsconder = () => { infoEscondida.className = "receita__principal u--esconder" }
 
     mostrarBtn.addEventListener('click', () => {
         infoEscondida.className = infoEscondida.className.includes("u--esconder") ? "receita__principal" : "receita__principal u--esconder";
         receitaCaixa.addEventListener('mouseleave', leaveFuncao);
+        mostrarBtn.querySelector("#iconeMostrarBtn").setAttribute("src", "imagens/icone-esconder.svg")
     })
 
     excluirBtn.addEventListener('click', () => deletarReceita(receita.id));

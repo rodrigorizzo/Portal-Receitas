@@ -14,8 +14,7 @@
             <h1 class="header__item header__titulo">Meu Caderno de Receitas</h1>
             <nav class="header__item">
                 <ul class="header__ul">
-                    <li class="header__li"><a role="button" onclick="carregarReceitas()"
-                            class="header__link">Recarregar</a></li>
+                    <li class="header__li"><button id="recarregarBtn" class="header__link u__resetBtn">Recarregar</button></li>
                     <li class="header__li"> <a class="header__link" href="#NR">Adicionar</a></li>
                     <li class="header__li"><a class="header__link" href="">Exportar</a></li>
                     <li class="header__li"><a class="header__link" href="">Filtrar</a></li>
@@ -35,9 +34,9 @@
                             <ul class="receita__lista-ingredientes"></ul>
                             <h4 class="receita__h4">Modo de Preparo</h4>
                             <div class="receita__preparo"></div>
-                            <button type="button" class="button">Excluir</button>
+                            <button type="button" class="button"><img class="u__icone" src="imagens/icone-lixeira.svg" alt="excluir"></button>
                         </div>
-                        <button type="button" class="receita__mostrar-btn">Mostrar</button>
+                        <button type="button" class="receita__mostrar-btn"><img id="iconeMostrarBtn" class="u__icone" src="imagens/icone-mostrar.svg" alt="Mostrar"></button>
                     </div>
                 </article>
             </template>
@@ -46,7 +45,6 @@
                 <h2 class="u--esconder">Minhas Receitas</h2>
                 <div id="receitasSection" class="receitas-section"></div>
             </section>
-
 
             <section id="NR" class="receita-form__section">
                 <h2 class="receita-form__titulo-section">Adicionar nova receita</h2>
