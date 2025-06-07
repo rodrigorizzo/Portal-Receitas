@@ -11,27 +11,52 @@ document.addEventListener('DOMContentLoaded', carregarReceitas);
 // Evento submit do formulário
 document.getElementById('formReceita').addEventListener('submit', function (e) {
     e.preventDefault();
-    gerenciarForm();
-    this.reset();
+    let formValido = true;
+    let novaReceita = gerenciarForm();
+
+    console.log("tamanho dop titulo" + novaReceita.titulo.length)
+
+    if (novaReceita.titulo.length < 3) {
+        mostrarErro("NRTitulo", "NRTituloErro", "O título da receita deve ter no mínimo 3 caracteres.");
+        formValido = false;
+    } else {
+        esconderErro("NRTitulo", "NRTituloErro");
+    }
+
+
+    if (novaReceita.ingredientes.length < 2) {
+        mostrarErro("NRIngredientes", "NRIngredientesErro", "A receita deve ter, no mínimo, dois ingredientes separados por vírgula.");
+        formValido = false;
+    } else {
+        esconderErro("NRIngredientes", "NRIngredientesErro");
+    }
+
+    if (formValido) {
+        salvarReceita(novaReceita);
+        mostrarReceitas(novaReceita);
+        this.reset();
+    }
 });
 
 // Formulário de tempo
-
 document.getElementById('NRTempoPreparo').addEventListener('input', function () {
     let value = this.value.replace(/\D/g, '');
 
     if (value.length > 2) {
         value = value.substring(0, 2) + ':' + value.substring(2, 4);
     }
-
-
     this.value = value.substring(0, 5);
 
 })
 
+//Contador de caracteres
+document.getElementById("NRModoPreparo").addEventListener('input', function ()  {
+    let entrada = this.value;
+    document.getElementById("NRPreparoContador").textContent = `${entrada.length}/30 caracteres.`;
+})
+
 //Botão de recarregar
 document.getElementById("recarregarBtn").addEventListener("click", () => {
-    console.log("Recarregar funcionou")
     document.getElementById("receitasSection").replaceChildren();
     carregarReceitas();
 })
@@ -54,8 +79,6 @@ document.getElementById("NRLimparBtn").addEventListener("click", function () {
 })
 
 
-
-
 /* __________________________ Funções __________________________ */
 
 
@@ -72,7 +95,7 @@ function gerenciarForm() {
     const novaReceita = {
         id: Date.now(),
         titulo: document.querySelector("#NRTitulo").value,
-        ingredientes: document.querySelector("#NRIngredientes").value.split(',').map(i => i.trim()),
+        ingredientes: document.querySelector("#NRIngredientes").value.split(',').map(i => i.trim()).filter(Boolean),
         preparo: document.querySelector("#NRModoPreparo").value.split('\n').map(i => i.trim()),
         tempo: document.querySelector("#NRTempoPreparo").value,
         classificacao: document.querySelector("#NRClassificacao").value,
@@ -80,12 +103,19 @@ function gerenciarForm() {
         categorias: categorias
     };
 
-    salvarReceita(novaReceita);
-    mostrarReceitas(novaReceita);
+    return novaReceita;
 }
 
-function validarReceita(receita) {
+function mostrarErro(inputId, erroId, mensagem) {
+    const elementoErro = document.getElementById(erroId);
+    elementoErro.textContent = mensagem;
+    elementoErro.style.display = "block";
+    document.getElementById(inputId).classList.add("receita-form--invalid");
+}
 
+function esconderErro(inputId, erroId) {
+    document.getElementById(erroId).style.display = "none";
+    document.getElementById(inputId).classList.remove("receita-form--invalid");
 }
 
 function salvarReceita(receita) {
@@ -116,8 +146,8 @@ function mostrarReceitas(receita) {
     const preparo = clone.querySelector(".receita__preparo");
     const categorias = clone.querySelector(".receita__lista-categorias");
     const destaque = clone.querySelector(".receita__destaques")
-    const excluirBtn = clone.querySelector(".button")
-    const mostrarBtn = clone.querySelector(".receita__mostrar-btn")
+    const excluirBtn = clone.querySelector("#receitaExcluirBtn")
+    const mostrarBtn = clone.querySelector("#receitaMostrarBtn")
     const infoEscondida = clone.querySelector(".receita__principal")
 
     titulo.textContent = receita.titulo;

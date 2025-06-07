@@ -9,6 +9,8 @@
     --cor-cinza-medio: #bebebe;
     --cor-cinza-escuro: #555555;
 
+    --transicao: all 0.3s ease;
+
     font-family: var(--font-family);
     font-weight: 400;
 
@@ -112,11 +114,12 @@ body {
     border: 1px solid #bebebe;
     border-radius: 5px;
 
-
-    &:user-invalid {
-        border: #f00 solid 1px;
-    }
 }
+
+.receita-form--invalid {
+    border: #f00 solid 1px;
+}
+
 
 .receita-form__textarea {
     resize: vertical;
@@ -124,8 +127,6 @@ body {
     margin: 0;
 }
 
-/* .receita-form__input--inline {}
- */
 .receita-form__label {
     display: inline-block;
 
@@ -133,14 +134,18 @@ body {
     font-weight: var(--font-regular);
     color: #4b4b4b;
 
+    margin: 16px 0 0 0;
+
 }
 
-.receita-form__descritivo {
+.receita-form__descritivo--erro,
+.receita-form__descritivo--contador {
     font-size: 0.8rem;
     font-weight: var(--font-thin);
 }
 
 .receita-form__descritivo--erro {
+    display: none;
     color: #f00;
 }
 
@@ -181,7 +186,7 @@ body {
     &:hover {
         background-color: #b1b1b1;
         transform: translateY(-2px);
-        transition: all 0.3s ease;
+        transition: var(--transicao);
     }
 }
 
@@ -242,14 +247,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    color: var(--cor-cinza-escuro);
 
     padding: 24px 16px 16px 16px;
 
     border: #ddd solid 1px;
 
     &:hover {
-        box-shadow: 2px 2px 5px #dfdfdf;
-        transition: all 0.3s ease;
+        color: #000;
     }
 }
 
@@ -265,9 +270,10 @@ body {
     white-space: nowrap;
 
     font-size: 0.7rem;
+    font-weight: var(--font-regular);
     padding: 2px 4px;
-    color: #fff;
-    background-color: #4b4b4b;
+    color: var(--cor-cinza-escuro);
+    border: var(--cor-cinza-escuro) solid 1px;
     margin-right: 2px;
 
     &:last-of-type {
@@ -320,18 +326,18 @@ body {
     width: 20px;
 }
 
-.receita__mostrar-btn {
+.receita__btn {
 
     background-color: transparent;
-    border: 0;
+    border: var(--cor-cinza-medio) solid 1px;
     cursor: pointer;
 
     &:hover {
-        background-color: #eeeeee;
+        box-shadow: var(--cor-cinza-claro) 5px 5px 5px;
     }
 
     &:active {
-        background-color: #ddd;
+        background-color: #ff2929;
     }
 
 }

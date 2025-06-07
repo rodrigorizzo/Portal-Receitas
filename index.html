@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CookBook</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="imagens/icone-chef.svg" type="image/x-icon">
 </head>
 
 <body>
@@ -14,8 +15,9 @@
             <h1 class="header__item header__titulo">Meu Caderno de Receitas</h1>
             <nav class="header__item">
                 <ul class="header__ul">
-                    <li class="header__li"><button id="recarregarBtn" class="header__link u__resetBtn">Recarregar</button></li>
-                    <li class="header__li"> <a class="header__link" href="#NR">Adicionar</a></li>
+                    <li class="header__li"><button id="recarregarBtn"
+                            class="header__link u__resetBtn">Recarregar</button></li>
+                    <li class="header__li"><a class="header__link" href="#NR">Adicionar</a></li>
                     <li class="header__li"><a class="header__link" href="">Exportar</a></li>
                     <li class="header__li"><a class="header__link" href="">Filtrar</a></li>
                 </ul>
@@ -34,9 +36,11 @@
                             <ul class="receita__lista-ingredientes"></ul>
                             <h4 class="receita__h4">Modo de Preparo</h4>
                             <div class="receita__preparo"></div>
-                            <button type="button" class="button"><img class="u__icone" src="imagens/icone-lixeira.svg" alt="excluir"></button>
+                            <button type="button" id="receitaExcluirBtn" class="receita__btn"><img class="u__icone"
+                                    src="imagens/icone-lixeira.svg" alt="Excluir receita"></button>
                         </div>
-                        <button type="button" class="receita__mostrar-btn"><img id="iconeMostrarBtn" class="u__icone" src="imagens/icone-mostrar.svg" alt="Mostrar"></button>
+                        <button id="receitaMostrarBtn" type="button" class="receita__btn"><img id="iconeMostrarBtn"
+                                class="u__icone" src="imagens/icone-mostrar.svg" alt="Mostrar receita"></button>
                     </div>
                 </article>
             </template>
@@ -54,11 +58,11 @@
                             <label class="receita-form__label" for="NRTitulo">Título da Receita
                                 <span aria-label="obrigatório">*</span><br>
                                 <input class="receita-form__input" type="text" name="NRTitulo" id="NRTitulo"
-                                    placeholder="Ex. Bolo de Cenoura" required>
+                                    placeholder="Ex. Bolo de Cenoura">
                             </label>
-                            <span id="NRTituloErro" class="receita-form__descritivo receita-form__descritivo--erro">O
-                                título
-                                da receita deve conter, no mínimo, 3 caracteres</span>
+                            <span id="NRTituloErro" class="receita-form__descritivo--erro">
+                                O título da receita deve conter, no mínimo, 3 caracteres
+                            </span>
 
                             <div class="u__rows">
 
@@ -151,22 +155,22 @@
                                 <span aria-label="obrigatório">*</span><br>
                                 <textarea class="receita-form__textarea" name="NRIngredientes" id="NRIngredientes"
                                     placeholder="Liste os ingredientes separados por vírgula. Exemplo: Ingrediente 1, Ingrediente 2, Ingrediente 3"
-                                    required></textarea>
+                                    ></textarea>
                             </label>
                             <span id="NRIngredientesErro"
-                                class="receita-form__descritivo receita-form__descritivo--erro">Informe, no mínimo, 3
+                                class="receita-form__descritivo--erro">Informe, no mínimo, 3
                                 ingredientes. Utilize a vírgula (,)
                                 para separá-los.</span>
 
                             <label class="receita-form__label" for="NRModoPreparo">Modo de preparo
                                 <span aria-label="obrigatório">*</span><br>
                                 <textarea class="receita-form__textarea" name="NRModoPreparo" id="NRModoPreparo"
-                                    placeholder="Descreva aqui os procedimentos em detalhes." required></textarea>
+                                    placeholder="Descreva aqui os procedimentos em detalhes." ></textarea>
                             </label>
                             <span id="NRPreparoErro"
-                                class="receita-form__descritivo receita-form__descritivo--erro">Mínimo
+                                class="receita-form__descritivo--erro">Mínimo
                                 de 30 caracteres</span>
-                            <span class="receita-form__descritivo">0/30 caracteres</span>
+                            <span id="NRPreparoContador" class="receita-form__descritivo--contador">0/30 caracteres</span>
 
 
                         </div>
