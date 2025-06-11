@@ -39,7 +39,7 @@
                             <label class="receita-form__label" for="NRTitulo">Título da Receita
                                 <span aria-label="obrigatório">*</span><br>
                                 <input class="receita-form__input" type="text" name="NRTitulo" id="NRTitulo"
-                                    placeholder="Ex. Bolo de Cenoura">
+                                    placeholder="Ex. Bolo de Cenoura" autocomplete="off">
                             </label>
                             <span id="NRTituloErro" class="receita-form__descritivo--erro">
                                 O título da receita deve conter, no mínimo, 3 caracteres
@@ -75,7 +75,7 @@
                             </div>
 
                             <fieldset class="receita-form__fieldset">
-                                <legend>Categorias</legend>
+                                <legend class="receita-form__legend">Categorias</legend>
 
                                 <label class="receita-form__cb-label" for="NRCat1">
                                     <input class="receita-form__cb" type="checkbox" name="Bolos e Tortas"
@@ -130,12 +130,13 @@
                             </fieldset>
 
                         </div>
-                        <div class="receita-form__coluna">
+                        <div class="receita-form__coluna receita-form__coluna--expandir">
 
                             <label class="receita-form__label" for="NRIngredientes">Ingredientes
                                 <span aria-label="obrigatório">*</span><br>
                                 <textarea class="receita-form__textarea" name="NRIngredientes" id="NRIngredientes"
-                                    placeholder="Liste os ingredientes separados por vírgula. Exemplo: Ingrediente 1, Ingrediente 2, Ingrediente 3"></textarea>
+                                    placeholder="Liste os ingredientes separados por vírgula. Exemplo: Ingrediente 1, Ingrediente 2, Ingrediente 3"
+                                    autocomplete="off"></textarea>
                             </label>
                             <span id="NRIngredientesErro" class="receita-form__descritivo--erro">Informe, no mínimo, 3
                                 ingredientes. Utilize a vírgula (,)
@@ -144,7 +145,8 @@
                             <label class="receita-form__label" for="NRModoPreparo">Modo de preparo
                                 <span aria-label="obrigatório">*</span><br>
                                 <textarea class="receita-form__textarea" name="NRModoPreparo" id="NRModoPreparo"
-                                    placeholder="Descreva aqui os procedimentos em detalhes."></textarea>
+                                    placeholder="Descreva aqui os procedimentos em detalhes."
+                                    autocomplete="off"></textarea>
                             </label>
                             <span id="NRPreparoErro" class="receita-form__descritivo--erro">Mínimo
                                 de 30 caracteres</span>

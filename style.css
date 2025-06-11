@@ -109,12 +109,6 @@ body {
 
     text-decoration: none;
     color: #000;
-
-    /*     border: var(--borda-padrao);
- */
-    /*  &:hover {
-        background-color: var(--cor-cinza-clarissimo);
-    } */
 }
 
 .__imagem {
@@ -138,7 +132,6 @@ body {
 @media (min-width: 1100px) {
     .receita-form__section {
         width: 1050px;
-
         margin: 0 auto;
     }
 }
@@ -159,24 +152,28 @@ body {
 }
 
 .receita-form__coluna {
-    width: 100%;
-
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     gap: 8px;
 }
 
-.receita-form__input,
-.receita-form__textarea {
+.receita-form__coluna--expandir {
     width: 100%;
-    padding: 12px 14px 8px 14px;
+}
 
-    box-sizing: border-box;
+
+/* todos os controles */
+
+.receita-form__input,
+.receita-form__textarea,
+.receita-form__selecao {
 
     font-family: var(--font-family);
     font-size: 1rem;
     font-weight: var(--font-regular);
+
+    box-sizing: border-box;
+    padding: 12px 14px 8px 14px;
 
     background-color: transparent;
     border: var(--borda-padrao);
@@ -184,10 +181,14 @@ body {
 
 }
 
+.receita-form__input,
+.receita-form__textarea {
+    width: 100%;
+}
+
 .receita-form__textarea {
     resize: vertical;
     min-height: 100px;
-    margin: 0;
 }
 
 .receita-form__input--tempo {
@@ -198,15 +199,14 @@ body {
     border: #f00 solid 1px;
 }
 
+.receita-form__legend,
 .receita-form__label {
     display: inline-block;
-
+    margin: 0 0 2px 0;
+    padding: 0;
     font-size: 0.9rem;
     font-weight: var(--font-regular);
-    color: #4b4b4b;
-
-    margin: 0;
-
+    color: var(--cor-cinza-escuro);
 }
 
 .receita-form__descritivo--erro,
@@ -221,31 +221,14 @@ body {
 }
 
 .receita-form__selecao {
-    padding: 12px 14px 8px 14px;
-
-    box-sizing: border-box;
-
-    font-family: var(--font-family);
-    font-size: 1rem;
-    font-weight: var(--font-regular);
-
-    background-color: transparent;
-    border: var(--borda-padrao);
-    border-radius: 5px;
-
     width: 150px;
-
     cursor: pointer;
 }
 
-.receita-form__option {
-    background-color: #fff;
-}
-
-
+/* .receita-form__option {} */
 
 .receita-form__btn--enviar {
-    background-color: #b2ff36;
+    background-color: var(--cor-primaria);
     padding: 12px 36px 8px 36px;
 }
 
@@ -268,20 +251,27 @@ body {
 
 /* cb = checkbox */
 .receita-form__cb {
-    margin: 0 2px 0 0;
-
-    &:checked {
-        accent-color: #000;
-    }
+    accent-color: #000;
+    margin: 0 0 2px 0;
 }
 
 .receita-form__cb-label {
+    display: inline;
     font-weight: var(--font-regular);
     cursor: pointer;
 
     /* Para impedir que a checkbox fique distante da label */
     white-space: nowrap;
     margin: 0;
+
+    &:hover {
+        transition: var(--transicao);
+        background-color: var(--cor-cinza-clarissimo);
+    }
+
+    &:has(:checked) {
+        font-weight: 600;
+    }
 }
 
 
@@ -362,25 +352,22 @@ body {
 
 .receita__item {
     display: block;
-    margin: auto 0;
+}
+
+.receita__dificuldade::before,
+.receita__tempo::before {
+    display: inline-block;
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 2px;
 }
 
 .receita__tempo::before {
     content: url(imagens/icone-tempo.svg);
-    display: inline-block;
-    margin-right: 2px;
-    width: 20px;
-
-    & {
-        fill: #f00;
-    }
 }
 
 .receita__dificuldade::before {
     content: url(imagens/icone-chef.svg);
-    display: inline-block;
-    margin-right: 2px;
-    width: 20px;
 }
 
 .receita__excluir-btn,
@@ -392,10 +379,6 @@ body {
 
 .receita__excluir-btn {
     background-color: var(--cor-primaria);
-
-    &:hover {
-        background-color: var(--cor-primaria-clara);
-    }
 }
 
 .receita__mostrar-btn {
@@ -431,20 +414,28 @@ body {
         grid-template-columns: 100%;
         gap: 16px;
 
+
         width: fit-content;
         margin: 0 auto;
     }
 
+    /* 
     .receita__container {
         width: 500px;
+    } */
+
+    .receita-form__section {
+        box-sizing: border-box;
+        max-width: 500px;
+
     }
 
     .receita-form__container {
         flex-direction: column;
     }
 
-    .u__rows {
-        flex-direction: column;
+    .receita-form__grupo-input-h {
+        flex-wrap: wrap;
     }
 }
 
