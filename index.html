@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CookBook</title>
+    <title>RecipeHub</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="shortcut icon" href="imagens/icone-chef.svg" type="image/x-icon">
 </head>
@@ -12,38 +12,19 @@
 <body>
     <div class="app">
         <header class="header">
-            <h1 class="header__item header__titulo">Meu Caderno de Receitas</h1>
+            <h1 class="header__titulo header__item">RecipeHub</h1>
+            <p class="header__item">O lar das suas melhores receitas</p>
             <nav class="header__item">
                 <ul class="header__ul">
-                    <li class="header__li"><button id="recarregarBtn"
-                            class="header__link u__resetBtn">Recarregar</button></li>
-                    <li class="header__li"><a class="header__link" href="#NR">Adicionar</a></li>
-                    <li class="header__li"><a class="header__link" href="">Exportar</a></li>
-                    <li class="header__li"><a class="header__link" href="">Filtrar</a></li>
+                    <li class="header__li"><button id="recarregarBtn" class="header__link u__btn">Recarregar</button></li>
+                    <li class="header__li"><a class="header__link u__btn" href="#NR">Adicionar Receita</a></li>
                 </ul>
             </nav>
         </header>
+        <div class="__imagem"></div>
+        <main class="main ">
 
-        <main class="main">
-            <template id="receitaModelo">
-                <article>
-                    <div class="receita__container">
-                        <ul class="receita__lista-categorias"></ul>
-                        <h3 class="receita__titulo"></h3>
-                        <ul class="receita__destaques"></ul>
-                        <div class="receita__principal u--esconder">
-                            <h4 class="receita__h4">Ingredientes</h4>
-                            <ul class="receita__lista-ingredientes"></ul>
-                            <h4 class="receita__h4">Modo de Preparo</h4>
-                            <div class="receita__preparo"></div>
-                            <button type="button" id="receitaExcluirBtn" class="receita__btn"><img class="u__icone"
-                                    src="imagens/icone-lixeira.svg" alt="Excluir receita"></button>
-                        </div>
-                        <button id="receitaMostrarBtn" type="button" class="receita__btn"><img id="iconeMostrarBtn"
-                                class="u__icone" src="imagens/icone-mostrar.svg" alt="Mostrar receita"></button>
-                    </div>
-                </article>
-            </template>
+
 
             <section>
                 <h2 class="u--esconder">Minhas Receitas</h2>
@@ -64,14 +45,14 @@
                                 O título da receita deve conter, no mínimo, 3 caracteres
                             </span>
 
-                            <div class="u__rows">
+                            <div class="receita-form__grupo-input-h">
 
                                 <label class="receita-form__label" for="NRTempoPreparo">Tempo<br>
-                                    <input class="receita-form__input receita-form__input--inline" type="text"
+                                    <input class="receita-form__input receita-form__input--tempo" type="text"
                                         placeholder="00:00" name="NRTempoPreparo" id="NRTempoPreparo">
                                 </label>
 
-                                <label for="NRClassificacao" class="receita-form__label">Classificação
+                                <label for="NRClassificacao" class="receita-form__label">Classificação <br>
                                     <select class="receita-form__selecao" name="classificacao" id="NRClassificacao">
                                         <option class="receita-form__option" value=""> - </option>
                                         <option class="receita-form__option" value="1">⭐</option>
@@ -81,7 +62,7 @@
                                         <option class="receita-form__option" value="5">⭐⭐⭐⭐⭐</option>
                                     </select></label>
 
-                                <label for="NRDificuldade" class="receita-form__label">Dificuldade
+                                <label for="NRDificuldade" class="receita-form__label">Dificuldade<br>
                                     <select class="receita-form__selecao" name="dificuldade" id="NRDificuldade">
                                         <option class="receita-form__option" value=""> - </option>
                                         <option class="receita-form__option" value="Fácil">Fácil</option>
@@ -154,31 +135,29 @@
                             <label class="receita-form__label" for="NRIngredientes">Ingredientes
                                 <span aria-label="obrigatório">*</span><br>
                                 <textarea class="receita-form__textarea" name="NRIngredientes" id="NRIngredientes"
-                                    placeholder="Liste os ingredientes separados por vírgula. Exemplo: Ingrediente 1, Ingrediente 2, Ingrediente 3"
-                                    ></textarea>
+                                    placeholder="Liste os ingredientes separados por vírgula. Exemplo: Ingrediente 1, Ingrediente 2, Ingrediente 3"></textarea>
                             </label>
-                            <span id="NRIngredientesErro"
-                                class="receita-form__descritivo--erro">Informe, no mínimo, 3
+                            <span id="NRIngredientesErro" class="receita-form__descritivo--erro">Informe, no mínimo, 3
                                 ingredientes. Utilize a vírgula (,)
                                 para separá-los.</span>
 
                             <label class="receita-form__label" for="NRModoPreparo">Modo de preparo
                                 <span aria-label="obrigatório">*</span><br>
                                 <textarea class="receita-form__textarea" name="NRModoPreparo" id="NRModoPreparo"
-                                    placeholder="Descreva aqui os procedimentos em detalhes." ></textarea>
+                                    placeholder="Descreva aqui os procedimentos em detalhes."></textarea>
                             </label>
-                            <span id="NRPreparoErro"
-                                class="receita-form__descritivo--erro">Mínimo
+                            <span id="NRPreparoErro" class="receita-form__descritivo--erro">Mínimo
                                 de 30 caracteres</span>
-                            <span id="NRPreparoContador" class="receita-form__descritivo--contador">0/30 caracteres</span>
+                            <span id="NRPreparoContador" class="receita-form__descritivo--contador">0/30
+                                caracteres</span>
 
 
                         </div>
 
                     </div>
                     <div class="receita-form__grupoBtn">
-                        <button class="receita-form__btn receita-form__btn--enviar" id="NRBotao">Enviar</button>
-                        <button type="button" class="receita-form__btn" id="NRLimparBtn">Limpar</button>
+                        <button class="u__btn receita-form__btn--enviar" id="NRBotao">Enviar</button>
+                        <button type="button" class="u__btn" id="NRLimparBtn">Limpar</button>
                     </div>
 
 
@@ -189,7 +168,29 @@
             <p>Desenvolvido por Rodrigo Rizzo Simões 2025</p>
         </footer>
     </div>
+
+    <!-- Não faz parte da estrutura -->
     <script src="/script.js"></script>
+
+    <template id="receitaModelo">
+        <article>
+            <div class="receita__container">
+                <ul class="receita__lista-categorias"></ul>
+                <h3 class="receita__titulo"></h3>
+                <ul class="receita__destaques"></ul>
+                <div class="receita__principal u--esconder">
+                    <h4 class="receita__h4">Ingredientes</h4>
+                    <ul class="receita__lista-ingredientes"></ul>
+                    <h4 class="receita__h4">Modo de Preparo</h4>
+                    <div class="receita__preparo"></div>
+                    <button type="button" id="receitaExcluirBtn" class="u__btn receita__excluir-btn"><img class="u__icone"
+                            src="imagens/icone-lixeira.svg" alt="Excluir receita"></button>
+                </div>
+                <button id="receitaMostrarBtn" type="button" class="receita__mostrar-btn"><img id="iconeMostrarBtn"
+                        class="u__icone" src="imagens/icone-mostrar.svg" alt="Mostrar receita"></button>
+            </div>
+        </article>
+    </template>
 </body>
 
 </html>
