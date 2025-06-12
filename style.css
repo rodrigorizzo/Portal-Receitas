@@ -113,13 +113,15 @@ body {
 
 .__imagem {
     background-image: url(imagens/ingredientes-fundo.png);
-    background-size: auto 100%;
+    background-size: auto 350px;
     background-repeat: repeat;
 
     margin-left: calc(var(--espacamento) * -2);
     margin-right: calc(var(--espacamento) * -1);
 
     height: 250px;
+
+
 }
 
 .receita-form__section {
