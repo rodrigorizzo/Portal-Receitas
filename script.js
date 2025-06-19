@@ -14,8 +14,7 @@ document.getElementById('formReceita').addEventListener('submit', function (e) {
     let formValido = true;
     let novaReceita = gerenciarForm();
 
-    console.log("tamanho dop titulo" + novaReceita.titulo.length)
-
+    //validação do formulário
     if (novaReceita.titulo.length < 3) {
         mostrarErro("NRTitulo", "NRTituloErro", "O título da receita deve ter no mínimo 3 caracteres.");
         formValido = false;
@@ -23,12 +22,27 @@ document.getElementById('formReceita').addEventListener('submit', function (e) {
         esconderErro("NRTitulo", "NRTituloErro");
     }
 
-
     if (novaReceita.ingredientes.length < 2) {
         mostrarErro("NRIngredientes", "NRIngredientesErro", "A receita deve ter, no mínimo, dois ingredientes separados por vírgula.");
         formValido = false;
     } else {
         esconderErro("NRIngredientes", "NRIngredientesErro");
+    }
+
+    console.log(novaReceita.preparo)
+    let caracteresPreparo = 0;
+    novaReceita.preparo.forEach(i => {
+        caracteresPreparo += i.length;
+        console.log(caracteresPreparo);
+    });
+
+    console.log(caracteresPreparo)
+
+    if (caracteresPreparo < 30) {
+        mostrarErro("NRModoPreparo", "NRPreparoErro", "Coloque, no mínimo, 30 caracteres no campo modo de preparo");
+        formValido = false;
+    } else {
+        esconderErro("NRModoPreparo", "NRPreparoErro");
     }
 
     if (formValido) {
@@ -50,8 +64,9 @@ document.getElementById('NRTempoPreparo').addEventListener('input', function () 
 })
 
 //Contador de caracteres
-document.getElementById("NRModoPreparo").addEventListener('input', function ()  {
+document.getElementById("NRModoPreparo").addEventListener('input', function () {
     let entrada = this.value;
+    entrada = entrada.replaceAll("\n", "");
     document.getElementById("NRPreparoContador").textContent = `${entrada.length}/30 caracteres.`;
 })
 
