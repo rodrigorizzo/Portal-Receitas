@@ -109,7 +109,3 @@ Sinta-se à vontade para fazer um fork do repositório, propor melhorias e envia
 -----
 
 **Desenvolvido por Rodrigo Rizzo Simões © 2025**
-
------
-
-Espero que este `README.md` em português atenda perfeitamente às suas expectativas\! Me diga se gostaria de mais alguma alteração ou detalhe.
