@@ -2,6 +2,8 @@
 
 O **RecipeHub** é uma aplicação web simples e eficaz, desenvolvida para ajudar você a gerenciar suas receitas favoritas. Construído puramente com HTML, CSS e JavaScript, ele permite que você adicione novas receitas com detalhes como título, ingredientes, passos de preparo, tempo, classificação, dificuldade e categorias. Todas as suas receitas são armazenadas localmente no seu navegador, proporcionando uma experiência personalizada e conveniente.
 
+![image](https://github.com/user-attachments/assets/88ef5809-c766-483a-a2c2-a314a3c20777)
+
 -----
 
 ## Funcionalidades
